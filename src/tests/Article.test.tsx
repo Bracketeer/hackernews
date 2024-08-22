@@ -5,8 +5,8 @@ import { renderWithClient } from './utils'
 import { QueryClient } from '@tanstack/react-query'
 import { Article as HackerNewsArticle } from '../../types'
 
-jest.mock('../api/articles')
-jest.mock('@tanstack/react-query')
+// jest.mock('../api/articles')
+// jest.mock('@tanstack/react-query')
 
 const queryClient = new QueryClient({
 	defaultOptions: {

@@ -1,7 +1,7 @@
+import { useMemo } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { saveArticle } from '../api/articles'
 import { formatDistance } from 'date-fns'
-import { useMemo } from 'react'
 import { Article as HackerNewsArticle } from '../../types'
 
 export default function Article({ article }: { article: HackerNewsArticle }) {

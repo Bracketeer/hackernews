@@ -2,9 +2,6 @@ import { render } from '@testing-library/react'
 import * as React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-jest.mock('../api/articles')
-jest.mock('@tanstack/react-query')
-
 const createTestQueryClient = () => new QueryClient({
 	defaultOptions: {
 		queries: {

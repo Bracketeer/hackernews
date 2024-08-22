@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { ErrorMessage } from './ErrorMessage'
+import { ErrorMessage } from '../components/ErrorMessage'
 
 describe('ErrorMessage Component', () => {
 	test('renders the error message', () => {

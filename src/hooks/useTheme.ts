@@ -16,16 +16,16 @@ export default function useTheme() {
 	}
 
 	useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 		const handleThemeChange = (e: MediaQueryListEvent | MediaQueryList) => setTheme(e.matches ? 'dark' : 'light')
-    // Initial theme check
-    handleThemeChange(mediaQuery);
-    // Listen for changes
-    mediaQuery.addEventListener('change', handleThemeChange);
-    // Clean up the listener on unmount
-    return () => { mediaQuery.removeEventListener('change', handleThemeChange) }
+		// Initial theme check
+		handleThemeChange(mediaQuery)
+		// Listen for changes
+		mediaQuery.addEventListener('change', handleThemeChange)
+		// Clean up the listener on unmount
+		return () => { mediaQuery.removeEventListener('change', handleThemeChange) }
 	}, [])
-	
+
 	return {
 		theme,
 		setTheme

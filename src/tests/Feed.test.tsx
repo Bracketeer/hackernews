@@ -3,7 +3,7 @@ import Feed from '../components/Feed'
 import { Article as HackerNewsArticle } from '../../types'
 import { renderWithClient } from './utils'
 
-jest.mock('@tanstack/react-query')
+// jest.mock('@tanstack/react-query')
 
 const mockArticles: HackerNewsArticle[] = [
 	{
