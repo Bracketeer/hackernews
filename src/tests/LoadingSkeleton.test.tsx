@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import LoadingSkeleton from './LoadingSkeleton'
+import LoadingSkeleton from '../components/LoadingSkeleton'
 
 describe('LoadingSkeleton', () => {
 	it('renders without crashing', () => {

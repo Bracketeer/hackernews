@@ -1,30 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import Feed from '../components/Feed'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Article as HackerNewsArticle } from '../../types'
+import { renderWithClient } from './utils'
 
 jest.mock('@tanstack/react-query')
 
-const queryClient = new QueryClient({
-
-	defaultOptions: {
-
-		queries: {
-			retry: false,
-		},
-		mutations: {
-			retry: false
-		}
-	},
-})
-
-const Provider = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<QueryClientProvider client={queryClient}>
-			{children}
-		</QueryClientProvider>
-	)
-}
 const mockArticles: HackerNewsArticle[] = [
 	{
 		id: 1,
@@ -65,19 +45,13 @@ const mockArticles: HackerNewsArticle[] = [
 ]
 
 describe('Feed Component', () => {
-	test('renders without crashing', () => {
-		render(<Feed articles={[]} />, {
-			// wrapper: Provider
-		})
-		expect(screen.getByRole('list')).toBeInTheDocument()
+	test('renders without crashing', async () => {
+		renderWithClient(<Feed articles={[]} />)
+		await waitFor(() => expect(screen.getByRole('list')).toBeInTheDocument())
 	})
 
 	test('renders a list of articles', async () => {
-		render(<Feed articles={mockArticles} />, {
-			wrapper: Provider
-		}
-		)
-		screen.debug()
+		renderWithClient(<Feed articles={mockArticles} />)
 		await waitFor(() => {
 			const items = screen.findAllByRole('listitem')
 			expect(items).toHaveLength(mockArticles.length)

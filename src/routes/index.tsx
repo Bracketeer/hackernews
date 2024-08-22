@@ -37,7 +37,6 @@ function Index() {
 	// Determine when to fetch the next page for infinite scrolling
 	const { ref } = useInView({
 		onChange(_, entry: IntersectionObserverEntry) {
-			console.log({ entry, isFetchingNextPage, hasNextPage })
 			if (entry.isIntersecting && !isFetchingNextPage && hasNextPage) fetchNextPage()
 		},
 	})

@@ -1,10 +1,9 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/react'
 import Article from '../components/Article'
 import { saveArticle } from '../api/articles'
 import { renderWithClient } from './utils'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient } from '@tanstack/react-query'
 import { Article as HackerNewsArticle } from '../../types'
-import { ReactNode } from 'react'
 
 jest.mock('../api/articles')
 jest.mock('@tanstack/react-query')
@@ -42,7 +41,7 @@ describe('Article Component', () => {
 	})
 
 	it('renders article details correctly', async () => {
-		render(<Article article={article} />)
+		renderWithClient(<Article article={article} />)
 		await waitFor(() => {
 			expect(screen.getByText('Test Article')).toBeInTheDocument()
 			expect(screen.getByText('(example.com)')).toBeInTheDocument()
@@ -52,40 +51,40 @@ describe('Article Component', () => {
 		})
 	})
 
-	// it('calls saveArticle mutation on save button click', async () => {
-	// 	(saveArticle as jest.Mock).mockResolvedValue([article.id])
+	it('calls saveArticle mutation on save button click', async () => {
+		(saveArticle as jest.Mock).mockResolvedValue([article.id])
 
-	// 	renderWithClient(<Article article={article} />)
+		renderWithClient(<Article article={article} />)
 
-	// 	fireEvent.click(screen.getByText(' save'))
+		fireEvent.click(screen.getByText(' save'))
 
-	// 	await waitFor(() => {
-	// 		expect(saveArticle).toHaveBeenCalledWith(article.id)
-	// 	})
-	// })
+		await waitFor(() => {
+			expect(saveArticle).toHaveBeenCalledWith(article.id)
+		})
+	})
 
-	// it('updates the button text to "saved" after saving', async () => {
-	// 	(saveArticle as jest.Mock).mockResolvedValue([article.id])
+	it('updates the button text to "saved" after saving', async () => {
+		(saveArticle as jest.Mock).mockResolvedValue([article.id])
 
-	// 	renderWithClient(<Article article={article} />)
+		renderWithClient(<Article article={article} />)
 
-	// 	fireEvent.click(screen.getByText(' save'))
+		fireEvent.click(screen.getByText(' save'))
 
-	// 	await waitFor(() => {
-	// 		expect(screen.getByText(' saved')).toBeInTheDocument()
-	// 	})
-	// })
+		await waitFor(() => {
+			expect(screen.getByText(' saved')).toBeInTheDocument()
+		})
+	})
 
-	// it('removes the article from saved list if unsaved', async () => {
-	// 	const savedArticle = { ...article, saved: true };
-	// 	(saveArticle as jest.Mock).mockResolvedValue([])
+	it('removes the article from saved list if unsaved', async () => {
+		const savedArticle = { ...article, saved: true };
+		(saveArticle as jest.Mock).mockResolvedValue([])
 
-	// 	renderWithClient(<Article article={savedArticle} />)
+		renderWithClient(<Article article={savedArticle} />)
 
-	// 	fireEvent.click(screen.getByText(' saved'))
+		fireEvent.click(screen.getByText(' saved'))
 
-	// 	await waitFor(() => {
-	// 		expect(screen.getByText(' save')).toBeInTheDocument()
-	// 	})
-	// })
+		await waitFor(() => {
+			expect(screen.getByText(' save')).toBeInTheDocument()
+		})
+	})
 })
