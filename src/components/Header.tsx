@@ -9,7 +9,7 @@ export default function Header() {
 		<header className={'py-8 flex gap-8 items-center'}>
 
 			<div className={'flex gap-3 items-center'}>
-				<img src={'assets/logo.svg'} className={'h-6 w-6'} alt="Hacker News" />
+				<img src={'/logo.svg'} className={'h-6 w-6'} alt="Hacker News" />
 				<span className={'text-2xl font-semibold'}>Hacker News</span>
 			</div>
 			<nav className={'flex gap-2 text-xs'}>
